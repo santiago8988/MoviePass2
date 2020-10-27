@@ -9,9 +9,9 @@ create table Cinema
 {
     id int auto_increment,
     capacidad int ,
-    direccion string,
-    nombre string,
-    valor_entrada int,
+    adress string,
+    name string,
+    price int,
 
     constraint pkCinema primary key (id),
 
@@ -31,7 +31,7 @@ create table Show
     id int auto_increment,
     dia date,
     hora string,
-    idMovie int,
+    idMovie int, 
     idRoom int,
     constraint pkShow primary key (id),
     constraint fkShowMovie foreign key (idMovie) reference Movie (id),

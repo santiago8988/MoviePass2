@@ -7,7 +7,6 @@ class Cinema{
     private $idCinema;
     private $adress;
     private $name;
-    private $room;
     private $price;
 
     public function __construct($idCinema=" ",$adress="",$name=" ",$room=" ",$price=" ")
