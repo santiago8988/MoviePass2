@@ -28,6 +28,8 @@ class CinemaController
     {
         $arrayCinemas = $this->cinemaDAO->getAll();
 
+        
+
         require_once(VIEWS_PATH."cinema-list.php");
         
     }

@@ -11,7 +11,6 @@
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Direccion</th>
-      <th scope="col"> Cantidad de Salas</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -26,9 +25,10 @@
                                         <td><?php echo $cinema->getIdCinema(); ?></td>
                                         <td><?php echo $cinema->getName(); ?></td>
                                         <td><?php echo $cinema->getAdress(); ?></td>
-                                        <td><?php echo $cinema->getRoom(); ?></td>
-                                        <td><form action = "<?php echo FRONT_ROOT?>Cinema/Remove" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $cinema->getIdCinema(); ?>">Eliminar</button></form>
-                                            <form action = "<?php echo FRONT_ROOT?>Cinema/Edit" method = "POST"><button class="btn btn-primary btn-xs" type = "edit" name = "edit" value = "<?php echo $cinema->getIdCinema(); ?>">Editar</button></form>                                    </td>
+                                        <td><form action = "<?php echo FRONT_ROOT?>Cinema/Remove" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $cinema->getIdCinema(); ?>">Eliminar</button>
+                                        <form action = "<?php echo FRONT_ROOT?>Cinema/Edit" method = "POST"><button class="btn btn-primary btn-xs" type = "edit" name = "edit" value = "<?php echo $cinema->getIdCinema(); ?>">Editar</button></form> 
+                                        <form action = "<?php echo FRONT_ROOT?>Room/ShowListViewxCinema" method = "POST"><button class="btn btn-primary btn-xs" type = "edit" name = "edit" value = "<?php echo $cinema->getIdCinema(); ?>">Ver Salas</button></form>
+                                         </td>
                                     </tr>
                                 
                                 <?php

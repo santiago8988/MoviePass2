@@ -21,7 +21,7 @@ class roomDAO
             $sql= "SELECT * FROM Room";
 
             $this->connection=Connection::GetInstance();
-            $value=$this->connection->Execute($sql,);
+            $value=$this->connection->Execute($sql);
 
             foreach($value as $fila)
             {
@@ -48,16 +48,16 @@ class roomDAO
     public function getroomXcinema($idCinema)
     {
         $roomList =array();
-       
         try
         {   
-              $parameters['idCinema']=$idCinema;  
-              $sql = "SELECT * FROM Room WHERE idCinema=:idCinema";
+            $parameters['idCinema']=$idCinema;  
+            $sql = "SELECT * FROM Room WHERE idCinema=".$idCinema.";";
+            
 
               $this->connection=Connection::GetInstance();
 
+              
               $value=$this->connection->Execute($sql);
-
               if(!empty($value))
               {
                   foreach($value as $fila)
@@ -70,9 +70,10 @@ class roomDAO
                     array_push($roomList,$room);
                   }
 
-              }
+                }
+                return $roomList;
+  
 
-              return $roomList;
         }
         catch(PDOException $e)
         {

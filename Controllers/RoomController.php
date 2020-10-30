@@ -15,8 +15,10 @@ class RoomController
         $this->roomDAO= new roomDAO();
     }
 
-    public function ShowAddView()
+    public function ShowAddView($idCinema)
     {
+
+        
         require_once(VIEWS_PATH."add-room.php");
         
     }
