@@ -11,7 +11,7 @@ class HomeController
 
     public static function Index ()
     {
-        require_once(VIEWS_PATH."adminView.php");
+        require_once(VIEWS_PATH."admin-view.php");
     }
 
 }

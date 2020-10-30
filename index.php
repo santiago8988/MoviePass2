@@ -11,10 +11,13 @@ use Config\Autoload as Autoload;
 use Config\Request as Request;
 use Config\Router as Router;
 
-Autoload::Start();
+Autoload::start();
 
 session_start();
 
+
+
+require_once(VIEWS_PATH."nav.php");
 require_once(VIEWS_PATH."header.php");
 
 Router::Route(new Request());

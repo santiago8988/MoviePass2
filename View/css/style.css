@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    color: #ffffff;
+}
+
+.navbar-main {
+    position: relative;
+    width: 100%;
+    margin-bottom: 50px;
+    display: block;
+    background-color: #212121;
+}
+
+.navbar-main_logo-page {
+    padding: 0;
+    margin: 10px;
+    width: 220px;
+    height: 60px;
+}
+
+.navbar-main_ol li > a{
+    position: relative;
+    bottom: 35px;
+    left: 1330px;
+    text-decoration: none;
+    background-color: #b10000;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.navbar-main_ol li > a:hover {
+    background-color: #830101;
+}
+
+/**********************************************************************************************************************************/
+
+.form-register {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+body {
+    width:100%;
+    background: url("../img/fondo.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+}
+
+.div-bar {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background: #212121;
+    border-radius: 20px;
+    width: 1000px;
+    height: 1000px;
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+}
+
+.sub-menu li:hover > ol{
+    display: block;
+}
+
+h1 {
+    background: #212121;
+    margin: 30px;
+    padding: 10px;
+    font-size: 4em;
+}
+
+ol
+{
+    display: inline-flex;
+    list-style: none;
+}
+
+.x {
+    background-color: #b10000;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 15px;
+    padding: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.x:hover {
+    background-color: #830101;
+    font-size: 20px;
+}

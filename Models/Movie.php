@@ -7,8 +7,6 @@
 
         private $idMovie;
         private $movieName;
-        private $duration;
-        private $director;
         private $photo;
         private $overView;
         private $classification;
@@ -19,24 +17,20 @@
         private $gender;
 
 
-        public function __construct($movieName,$duration,$director,$photo,$overView,$classification,$voteAverage,$voteCount,$originalLanguage,$realeseDate,$idMovie,$gender)
+        public function __construct($movieName="",$photo="",$overView="",$classification="",$voteAverage="",$voteCount="",$originalLanguage="",$realeseDate="",$idMovie="")
         {
             $this->idMovie=$idMovie;
-            $this-> movieName=$movieName;
-            $this->duration =$duration;
-            $this-> director=$director;
-            $this-> photo=$photo;
-            $this-> resume=$overView;
-            $this-> classification=$classification;
+            $this->movieName=$movieName;
+            $this->photo=$photo;
+            $this->resume=$overView;
+            $this->classification=$classification;
             $this->voteAverage= $voteAverage;
             $this->voteCount=$voteCount;
             $this->originalLanguage=$originalLanguage;
-            $this->releaseDate=$realeseDate;
-            $this->gender=$gender;
+            $this->realeseDate=$realeseDate;
+            $this->gender=array();
         }
 
-
-        
 
         /**
          */
@@ -125,8 +119,9 @@
         /**
          */
         public function getClassification()
-        {
-            return $this->classification;
+        {   if ($this->classification == false)
+            return "Mayores";
+            else { return "ATP";}
         }
 
         /**
@@ -208,7 +203,21 @@
         {
             $this->gender=$gender;
         }
+        /**
+         */
+        public function printGender()
+        {
+            
+            $array=$this->getGender();
 
-    }
+           $implodeArray = implode(",",$array);
+
+           echo $implodeArray;
+            
+
+        }
+    
+
+     }
 
 ?>

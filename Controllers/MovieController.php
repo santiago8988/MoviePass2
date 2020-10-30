@@ -24,16 +24,19 @@ class movieController
     {
         require_once(VIEWS_PATH."movie-add.php");
 
-        //falta vista 
+      
     }
 
     public function ShowListView()
     {
-        $movieList = $this->movieDAO->getAll();
-        $genderList = $this->genderDAO->getAll();
+       $this->movieDAO->downloadData();
+       $this->genderDAO->downloadData();
+       $movieList = $this->movieDAO->getAll();
+       
+       //$genderList = $this->gendreDAO->getAll();
 
         require_once(VIEWS_PATH."movie-list.php");
-        //falta vista listar las pelis
+        
     }
 
 

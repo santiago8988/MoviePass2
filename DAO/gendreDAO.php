@@ -6,7 +6,18 @@ use Models\Gendre as Gendre;
 
 class gendreDAO
 {
-    private $gendreList=array();
+
+    private $gendreList;
+
+    public function __construct()
+    {
+        $this->gendreList=array();
+    }
+
+    public function getGenderList()
+    {
+        return $this->gendreList;
+    }
 
     public function getAll ()
     {
@@ -55,20 +66,21 @@ class gendreDAO
 
     public function downloadData()
     {
-        $this->movieList=array();
+        
 
         $jsonContent = file_get_contents("https://api.themoviedb.org/3/genre/movie/list?api_key=".API_KEY."&language=en-US",true);
 
         $arrayToDecode=($jsonContent) ? json_decode($jsonContent,true) : array();
 
-        foreach ($arrayToDecode['genders'] as $valueArray)
+
+        foreach ($arrayToDecode['genres'] as $valueArray)
         {
             $gender = new Gendre ($valueArray['id'],$valueArray['name']);
 
             array_push($this->gendreList,$gender);
         }
 
-        $this->saveData();
+         $this->saveData();
     }
 
 }

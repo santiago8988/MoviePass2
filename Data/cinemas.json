@@ -1,0 +1,16 @@
+[
+    {
+        "idCinema": 2,
+        "adress": "12",
+        "name": "12",
+        "room": "12",
+        "price": "12"
+    },
+    {
+        "idCinema": 3,
+        "adress": "dsa",
+        "name": "dsadsadsa",
+        "room": "dsasadasd",
+        "price": "dasdasasd"
+    }
+]

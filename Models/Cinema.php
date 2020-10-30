@@ -7,15 +7,13 @@ class Cinema{
     private $idCinema;
     private $adress;
     private $name;
-    private $price;
+    
+    
 
-    public function __construct($idCinema=" ",$adress="",$name=" ",$room=" ",$price=" ")
+    public function __construct($adress="",$name=" ")
     {   
-        $this->idCinema=$idCinema;
-        $this->adress=$adress;
         $this->name=$name;
-        $this->room=$room;
-        $this->price=$price;
+        $this->adress=$adress;
     }
 
     /**
@@ -55,31 +53,7 @@ class Cinema{
         $this->name=$name;
     }
 
-    /**
-     */
-    public function getRoom()
-    {
-        return $this->room;
-    }
-    /**
-     */
-    public function setRoom($room)
-    {
-        $this->room=$room;
-    }
-
-    /**
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-    /**
-     */
-    public function setPrice($price)
-    {
-        $this->price=$price;
-    }
+    
 
 }
 

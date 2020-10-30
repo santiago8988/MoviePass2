@@ -2,88 +2,143 @@
 
 namespace Models;
 
-class Show
-{
-    private $idShow;
-    private $day;
-    private $hourStart;
-    private $idRoom;
-    private $idMovie;
 
-    public function __construct($idShow=" ",$day=" ",$hourStart =" ",$idRoom=" ",$idMovie=" ")
+    class Show
     {
-        $this->idShow=$idShow;
-        $this->day=$day;
-        $this->hourStart=$hourStart;
-        $this->idRoom=$idRoom;
-        $this->idMovie=$idMovie;
+        
+        private $id;
+        private $day;
+        private $hour;
+        private $soldTickets;
+        private $idMovie;
+        private $idRoom;
+        private $price;
+        private $capacity;
+        private $idCinema;
+
+            public function __construct($day="",$hour="",$soldTickets="")
+            {
+                $this->day=$day;
+                $this->hour=$hour;
+                $this->soldTickets=$soldTickets;
+            }
+
+            /**
+             */
+            public function getId()
+            {
+                return $this->id;
+            }
+            /**
+             */
+            public function setId($id)
+            {
+                $this->id=$id;
+            }
+            /**
+             */
+            public function getIdCinema()
+            {
+                return $this->idCinema;
+            }
+            /**
+             */
+            public function setIdCinema($idCinema)
+            {
+                $this->idCinema=$idCinema;
+            }
+            
+            /**
+             */
+            public function getDay()
+            {
+                return $this->day;
+            }
+            /**
+             */
+            public function setDay($day)
+            {
+                $this->day=$day;
+            }
+            /**
+             */
+            public function getHour()
+            {
+                return $this->hour;
+            }
+            /**
+             */
+            public function setHour($hour)
+            {
+                $this->hour=$hour;
+            }
+            /**
+             */
+            public function getSoldtickets()
+            {
+                return $this->soldTickets;
+            }
+            /**
+             */
+            public function setSoldtickets($soldTickets)
+            {
+                $this->soldTickets=$soldTickets;
+            }
+             /**
+             */
+            public function getIdmovie()
+            {
+                return $this->idMovie;
+            }
+            /**
+             */
+            public function setIdmovie($idMovie)
+            {
+                $this->idMovie=$idMovie;
+            }
+            /**
+             */
+            public function getIdroom()
+            {
+                return $this->idRoom;
+            }
+            /**
+             */
+            public function setIdroom($idRoom)
+            {
+                $this->idRoom=$idRoom;
+            }
+
+             /**
+             */
+            public function getPrice()
+            {
+                return $this->price;
+            }
+            /**
+             */
+            public function setPrice($price)
+            {
+                $this->price=$price;
+            }
+             /**
+             */
+            public function getCapacity()
+            {
+                return $this->capacity;
+            }
+            /**
+             */
+            public function setCapacity($capacity)
+            {
+                $this->capacity=$capacity;
+            }
+
+
 
 
     }
 
-    /**
-     */
-    public function getidShow()
-    {
-        return $this->idShow;
-    }
-    /**
-     */
-    public function setidShow($idShow)
-    {
-        $this->idShow=$idShow;
-    }
-    /**
-     */
-    public function getday()
-    {
-        return $this->day;
-    }
-    /**
-     */
-    public function setday($day)
-    {
-        $this->day=$day;
-    }
-    /**
-     */
-    public function gethourStart()
-    {
-        return $this->hourStart;
-    }
-    /**
-     */
-    public function sethourStart($hourStart)
-    {
-        $this->hourStart=$hourStart;
-    }
-    /**
-     */
-    public function getidRoom()
-    {
-        return $this->idRoom;
-    }
-    /**
-     */
-    public function setidRoom($idRoom)
-    {
-        $this->idRoom=$idRoom;
-    }
 
-    /**
-     */
-    public function getidMovie()
-    {
-        return $this->idMovie;
-    }
-    /**
-     */
-    public function setidMovie($idMovie)
-    {
-        $this->idMovie=$idMovie;
-    }
-
-
-}
 
 ?>
