@@ -47,31 +47,18 @@ class roomDAO
 
     public function getroomXcinema($idCinema)
     {
-        $roomList =array();
+        echo $idCinema;
+        $parameters['idCinema']=$idCinema;  
         try
         {   
-            $parameters['idCinema']=$idCinema;  
             $sql = "SELECT * FROM Room WHERE idCinema=".$idCinema.";";
             
 
               $this->connection=Connection::GetInstance();
 
               
-              $value=$this->connection->Execute($sql);
-              if(!empty($value))
-              {
-                  foreach($value as $fila)
-                  {
-                    $room=new Room();
-                    $room->setId($fila['id']);
-                    $room->setIdCinema($fila['idCinema']);
-                    $room->setName($fila['nameRoom']);
-                    $room->setPrice($fila['price']);
-                    array_push($roomList,$room);
-                  }
-
-                }
-                return $roomList;
+              return $this->connection->Execute($sql);
+      
   
 
         }

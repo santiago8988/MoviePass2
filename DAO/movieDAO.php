@@ -3,76 +3,64 @@
 namespace DAO;
 
 use Models\Movie as Movie;
-use DAO\gendreDAO as gendreDAO;
 use Models\Gendre as Gendre;
+use PDOException;
+use DAO\Connection as Connection;
+use DAO\QueryType as QueryType;
+use \PDO as PDO;
+use DAO\gendreDAO as gendreDAO;
+use DAO\gendermovieDAO as gendermovieDAO;
 
 class movieDAO
 {
-    private $movieList=array();
+    private $connection;
+
+    public function __construct()
+    {
+        
+    }
 
 
     public function getAll ()
     {
-        $this->retrieveData();
+        $movieList=array();
 
-        
-
-        return $this->movieList;
-    }
-
-    public function retrieveData()
-    {
-        $this->movieList=array();
-
-        if(file_exists(ROOT.'Data/movies.json'))
+        try
         {
-            $jsonContent= file_get_contents(ROOT.'Data/movies.json');
+            $sql="SELECT * FROM Movie";
 
-            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+            $this->connection=Connection::GetInstance();
+            $value = $this->connection->Execute($sql);
 
-
-            foreach ($arrayToDecode as $valueArray)
+            foreach ($value as $fila)
             {
-                $movie= new Movie($valueArray['title'],$valueArray['poster_path'],
-                                    $valueArray['overview'],$valueArray['adult'],$valueArray['vote_average'],$valueArray['vote_count'],
-                                    $valueArray['original_language'],$valueArray['release_date'],$valueArray['id']);
+                $movie = new Movie();
 
-                $movie->setGender($valueArray['gender']);
+                $movie->setIdMovie($fila['id']);
+                $movie->setMovieName($fila['title']);
+                $movie->setPhoto($fila['poster']);
+                $movie->setoverView($fila['overview']);
+                $movie->setClassification($fila['classification']);
+                $movie->setVoteAverage($fila['voteAverage']);
+                $movie->setVoteCount($fila['voteCount']);
+                $movie->setOriginalLanguage($fila['original_language']);
+                $movie->setReleaseDate($fila['realeseDate']);
 
-                array_push($this->movieList,$movie);
+                array_push($movieList,$movie);
+
             }
+            return $movieList;
+            
         }
-    }
-
-    public function saveData()
-    {
-        $arrayToEncode = array();
-
-        foreach($this->movieList as $movie)
+        catch(PDOException $e)
         {
-            $valueArray['title']=$movie->getMovieName();
-            $valueArray['poster_path']="http://image.tmdb.org/t/p/w500".$movie->getPhoto();
-            $valueArray['overview']=$movie->getOverview();
-            $valueArray['adult']=$movie->getClassification();
-            $valueArray['vote_average']=$movie->getVoteAverage();
-            $valueArray['vote_count']=$movie->getVoteCount();
-            $valueArray['original_language']=$movie->getOriginalLanguage();
-            $valueArray['release_date']=$movie->getReleaseDate();
-            $valueArray['id']=$movie->getIdMovie();
-            $valueArray['gender']=$movie->getGender();
-
-            array_push($arrayToEncode,$valueArray);
-
+            throw $e;
         }
-
-        $jsonContent= json_encode($arrayToEncode,JSON_PRETTY_PRINT);
-
-        file_put_contents(ROOT.'Data/movies.json',$jsonContent);
     }
 
     public function downloadData()
     {
-        $this->movieList=array();
+        
 
         $jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/now_playing?api_key=".API_KEY."&language=en-US&page=1",true);
 
@@ -81,44 +69,63 @@ class movieDAO
         
         foreach ($arrayToDecode['results'] as $valueArray)
         {
-            
-                $movie = new Movie();
-               
-                $movie->setMovieName($valueArray['title']);
-                $movie->setPhoto($valueArray['poster_path']);
-                $movie->setOverview($valueArray['overview']);
-                $movie->setClassification($valueArray['adult']);
-                $movie->setVoteAverage($valueArray['vote_average']);
-                $movie->setVoteCount($valueArray['vote_count']);
-                $movie->setOriginalLanguage( $valueArray['original_language']);
-                $movie->setReleaseDate($valueArray['release_date']);
-                $movie->setIdMovie($valueArray['id']);
-               
-                $gender_IDS=array();
-                $gender_IDS=$valueArray['genre_ids'];
+            $sql= "INSERT INTO Movie (title,poster,overview,classification,voteAverage,voteCount,original_language,duration,realeseDate) 
+                               values(:title,:poster,:overview,:classification,:voteAverage,:voteCount,:original_language,:duration,:realeseDate)";
+              
 
-                $genderDAO= new gendreDAO();
-                $genderList= $genderDAO->getAll();
+                $parameters['title']=$valueArray['title'];
+                $parameters['poster']=$valueArray['poster_path'];
+                $parameters['overview']=$valueArray['overview'];
+                $parameters['classification']=$valueArray['adult'];
+                $parameters['voteAverage']=$valueArray['vote_average'];
+                $parameters['voteCount']=$valueArray['vote_count'];
+                $parameters['original_language']=$valueArray['original_language'];
+                $parameters['duration']=0;
+                $parameters['realeseDate']=$valueArray['release_date'];
 
-                foreach ($gender_IDS as $genderID)
+              
+                try
                 {
-                    foreach ($genderList as $gender)
-                    {
-                        if($genderID==$gender->getIdGender())
-                        {
-                            $array=$movie->getGender();
-                            array_push($array,$gender->getGenderName());
-                            $movie->setGender($array);
-
-                        }
+                    $this->connection = Connection::GetInstance();
+                     $this->connection->ExecuteNonQuery($sql,$parameters);
+                    
+                        
                     }
-                }
-
-                array_push($this->movieList,$movie);
+                    catch(PDOException $e)
+                    {
+                        throw $e;   
+                    }       
                   
         }
 
-       $this->saveData();
+       
+    }
+
+
+    public function searchIdMovie($title)
+    {
+
+        $sql= "SELECT * FROM Movie  WHERE title='$title'";
+        
+        try
+        {
+           
+            $this->connection=Connection::GetInstance(); 
+            return $this->connection->Execute($sql);
+     
+            
+           /* foreach ($value as $key =>$valueArray)
+            {
+                $id=$valueArray['id'];
+            }
+            
+            return $id;*/
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
     }
 
 

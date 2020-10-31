@@ -3,21 +3,20 @@
 namespace DAO;
 
 use Models\Gendre as Gendre;
-
+use PDOException;
+use DAO\Connection as Connection;
+use DAO\QueryType as QueryType;
+use \PDO as PDO;
 class gendreDAO
 {
 
-    private $gendreList;
+    private $connection;
 
     public function __construct()
     {
-        $this->gendreList=array();
+        
     }
 
-    public function getGenderList()
-    {
-        return $this->gendreList;
-    }
 
     public function getAll ()
     {
@@ -30,7 +29,7 @@ class gendreDAO
     {
         $this->gendreList=array();
 
-        if(file_exists(dirname(__DIR__).'/Data/gendre.json'))
+        if(file_exists(ROOT.'/Data/gendre.json'))
         {
             $jsonContent= file_get_contents(dirname(__DIR__).'/Data/gendre.json');
 
@@ -61,7 +60,7 @@ class gendreDAO
 
         $jsonContent= json_encode($arrayToEncode,JSON_PRETTY_PRINT);
 
-        file_put_contents(dirname(__DIR__).'/Data/gendre.json',$jsonContent);
+        file_put_contents(ROOT.'/Data/gendre.json',$jsonContent);
     }
 
     public function downloadData()
@@ -73,14 +72,31 @@ class gendreDAO
         $arrayToDecode=($jsonContent) ? json_decode($jsonContent,true) : array();
 
 
-        foreach ($arrayToDecode['genres'] as $valueArray)
-        {
-            $gender = new Gendre ($valueArray['id'],$valueArray['name']);
+        
+        foreach ($arrayToDecode  as $key=> $valueArray)
+        {   
+            
+            foreach($valueArray as $key => $gender)
+            {
+                
+                $sql= "INSERT INTO Gender (id,nameGender) values(:id,:nameGender)";
+                $parameters['id']=$gender['id'];
+                $parameters['nameGender']=$gender['name'];
 
-            array_push($this->gendreList,$gender);
+                try
+                {
+                    $this->connection=Connection::GetInstance();
+                    $this->connection->ExecuteNonQuery($sql,$parameters);
+                }
+                catch(PDOException $e)
+                {   
+                    throw $e;
+                }
+            }
+
         }
 
-         $this->saveData();
+        
     }
 
 }

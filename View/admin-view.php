@@ -34,6 +34,11 @@
 
             <button type="submit">Listar Peliculas Cines</button>
         </form>
+
+        <form action="<?php echo FRONT_ROOT?>Movie/Add">
+
+            <button type="submit">Cargar Base de Datos</button>
+        </form>
         
 
 </html>

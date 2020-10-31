@@ -32,11 +32,18 @@ create table IF NOT EXISTS Room
 create table IF NOT EXISTS Movie
 (
     id int AUTO_INCREMENT NOT NULL,
-    duration int,
-    poster varchar(50),
-    original_language varchar(50),
     title varchar(50) NOT NULL,
+    poster varchar(75),
+    overview varchar(300),
+    classification boolean,
+    voteAverage float,
+    voteCount int,
+    original_language varchar(50),
+    duration int,
+    realeseDate date,
+
     constraint pkMovie primary key (id)
+
     
 );
 
@@ -147,20 +154,19 @@ create table IF NOT EXISTS Ticket
 
 
 
-
-   
-
 create table IF NOT EXISTS Gender
 (
-    id int AUTO_INCREMENT,
-    nameGender varchar(50) not null,
+    id int NOT NULL,
+    nameGender varchar(50) NOT NULL,
     constraint pkGender primary key (id)
 );
 
+
+
 create table IF NOT EXISTS MovieXGender
 (
-    idMovie int,
-    idGender int,
+    idMovie int NOT NULL,
+    idGender int NOT NULL,
     constraint pkMovieXGender primary key (idMovie,idGender),
     constraint fkMovieXGender foreign key (idMovie) REFERENCES Movie (id),
     constraint fkGenderXGender foreign key (idGender) REFERENCES Gender (id)

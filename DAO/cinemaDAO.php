@@ -21,8 +21,6 @@ class cinemaDAO
     {
         $cinemaList=array();
 
-
-
         try
         {
             $sql="SELECT * FROM Cinema";

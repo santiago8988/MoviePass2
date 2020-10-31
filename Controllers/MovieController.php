@@ -6,17 +6,20 @@ namespace Controllers;
 
 use DAO\gendreDAO as gendreDAO;
 use DAO\movieDAO as movieDAO;
+use DAO\gendermovieDAO as gendermovieDAO;
 
 
 class movieController
 {
     private $movieDAO;
     private $genderDAO;
+    private $gendermovieDAO;
 
     public function __construct()
     {
         $this->movieDAO = new movieDAO();
         $this->genderDAO = new gendreDAO();
+        $this->gendermovieDAO = new gendermovieDAO();
     }
 
 
@@ -29,11 +32,9 @@ class movieController
 
     public function ShowListView()
     {
-       $this->movieDAO->downloadData();
-       $this->genderDAO->downloadData();
-       $movieList = $this->movieDAO->getAll();
        
-       //$genderList = $this->gendreDAO->getAll();
+       $movieList=$this->movieDAO->getAll();
+     
 
         require_once(VIEWS_PATH."movie-list.php");
         
@@ -42,10 +43,13 @@ class movieController
 
     public function Add()
     {
-        $this->movieDAO->downloadData();
-        $this->genderDAO->downloadData();
+        //$this->movieDAO->downloadData();
+       // $this->genderDAO->downloadData();
+        $this->gendermovieDAO->downloadData();
 
-        $this->ShowAddView();
+        echo "se cargo todo bien";
+
+        require_once(VIEWS_PATH."admin-view.php");
     }
 }
 
