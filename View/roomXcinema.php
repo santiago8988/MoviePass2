@@ -3,7 +3,13 @@
 
     <div class="container">
         <h1 class="text-info"><?php echo $cinemaName ?></h1>
-        <h3 class="text-info">Listado de Salas</h3>
+        
+
+        <form class="form-inline" action="<?php echo FRONT_ROOT?>Room/ShowAddView" method = "POST">
+                    <label><h2>LISTADO DE SALAS:</h2></label>
+                    <input type = "hidden" name = "id" id = "idCinema" required value="<?php echo $idCinema;?>">
+                    <input type="submit" value="Crear Sala">
+        </form>
         
 
         <table class="table table-dark">
@@ -19,6 +25,7 @@
   <tbody>
   <?php
                         if(isset($roomList)){
+
                             foreach($roomList as $room)
                             {
                                 ?>

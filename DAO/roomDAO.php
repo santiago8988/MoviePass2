@@ -47,7 +47,7 @@ class roomDAO
 
     public function getroomXcinema($idCinema)
     {
-        echo $idCinema;
+        
         $parameters['idCinema']=$idCinema;  
         try
         {   

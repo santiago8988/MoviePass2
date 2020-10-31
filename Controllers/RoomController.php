@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\Room as Room;
 use DAO\roomDAO as roomDAO;
+use Controllers\CinemaController as CinemaController;
 
 class RoomController
 {
@@ -18,7 +19,7 @@ class RoomController
     public function ShowAddView($idCinema)
     {
 
-        
+        $idCinema=$idCinema;
         require_once(VIEWS_PATH."add-room.php");
         
     }
@@ -39,7 +40,11 @@ class RoomController
         $roomList=array();
 
         $roomDAO= new roomDAO();
+
         $value=$roomDAO->getroomXcinema($idCinema);
+
+        
+
         if(!empty($value))
         {
             foreach($value as $fila)
@@ -49,17 +54,21 @@ class RoomController
               $room->setIdCinema($fila['idCinema']);
               $room->setName($fila['nameRoom']);
               $room->setPrice($fila['price']);
+              $room->setCapacity($fila['capacity']);
+
               array_push($roomList,$room);
+              
             }
 
           }
+
    
        
         require_once(VIEWS_PATH."roomXcinema.php");
     }
 
 
-    public function Add($idCinema,$name,$capacity,$price)
+    public function Creat($idCinema,$name,$capacity,$price)
     {
         $room= new Room();
 
@@ -69,6 +78,10 @@ class RoomController
         $room->setPrice($price);
 
         $this->roomDAO->Add($room);
+
+        $cinemaController = new CinemaController();
+        $cinemaController->ShowListView();
+       
 
     }
 }
