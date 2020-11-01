@@ -2,11 +2,11 @@
 
 
     <div class="container">
-        <h2 class="text-info">Listado de Cines</h2>
+        <h2 class="text-dark">Listado de Cines</h2>
         
 
-        <table class="table table-dark">
-  <thead>
+        <table class="table table-dark table-hover">
+  <thead class="thead-light">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Cine</th>
@@ -25,16 +25,16 @@
                             {
                                 ?>
                                 
-                                    <tr>
+                                    <tr >
                                         <td><?php echo $show->getId(); ?></td>
-                                        <td><?php echo $show->getIdCinema(); ?></td>
+                                        <td ><?php echo $show->getIdCinema(); ?></td>
                                         <td><?php echo $show->getIdRoom(); ?></td>
                                         <td><?php echo $show->getIdMovie(); ?></td>
                                         <td><?php echo $show->getDay(); ?></td>
                                         <td><?php echo $show->getHour(); ?></td>
                                         <td><?php echo $show->getSoldTickets(); ?></td>
-                                        <td><form action = "<?php echo FRONT_ROOT?>Show/Remove" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $show->getId(); ?>">Eliminar</button>
-                                        <form action = "<?php echo FRONT_ROOT?>Show/Edit" method = "POST"><button class="btn btn-primary btn-xs" type = "edit" name = "edit" value = "<?php echo $show->getId(); ?>">Editar</button></form> 
+                                        <td><form action = "<?php echo FRONT_ROOT?>Show/Remove" method = "POST"><button class="btn btn-sm btn-secondary active " type = "submit" name = "remove" value = "<?php echo $show->getId(); ?>">Eliminar</button>
+                                        <form action = "<?php echo FRONT_ROOT?>Show/Edit" method = "POST"><button class="btn btn-sm btn-secondary active " type = "edit" name = "edit" value = "<?php echo $show->getId(); ?>">Editar</button></form> 
                                             
                                          </td>
                                     </tr>

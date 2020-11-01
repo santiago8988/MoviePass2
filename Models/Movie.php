@@ -199,9 +199,11 @@
 
         /**
          */
-        public function setGender($gender)
+        public function setGender($genderName)
         {
-            $this->gender=$gender;
+            $array=$this->getGender();
+            array_push($array,$genderName);
+            $this->gender=$array;
         }
         /**
          */

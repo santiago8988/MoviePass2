@@ -130,6 +130,34 @@ class movieDAO
         }
     }
 
+    public function getMovieswithGenders()
+    {
+      
+        $moviegenderDAO= new gendermovieDAO();
+
+        $value=$moviegenderDAO->getNameGendersxMovie();
+
+        $movieList=$this->getAll();
+
+        foreach($value as $gender)
+        {
+            $idMovie=$gender['idMovie'];
+            $nameGender=$gender['nameGender'];
+
+            foreach($movieList as $movie)
+            {
+                if($movie->getIdMovie() ==$idMovie)
+                {
+                    
+                    $movie->setGender($nameGender);
+                }
+            }
+
+        }
+
+        return $movieList;
+    }
+
 
 }
 

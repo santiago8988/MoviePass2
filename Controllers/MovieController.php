@@ -33,7 +33,9 @@ class movieController
     public function ShowListView()
     {
        
-       $movieList=$this->movieDAO->getAll();
+       
+        $movieList = $this->movieDAO->getMovieswithGenders();
+        
      
 
         require_once(VIEWS_PATH."movie-list.php");

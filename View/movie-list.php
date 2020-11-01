@@ -28,7 +28,7 @@
                                         <td><?php echo $movie->getVoteCount(); ?></td>
                                         <td><?php echo $movie->getOriginalLanguage(); ?></td>
                                         <td><?php echo $movie->getReleaseDate(); ?></td>
-                                        <td><?php echo  $movie->printGender();?></td>
+                                        <td><?php echo $movie->printGender();?> </td>
                                             
                                         
                                     </tr>

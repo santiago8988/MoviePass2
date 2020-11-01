@@ -8,7 +8,7 @@ class GenderMovie
     private $idMovie;
 
 
-    public function __construct($idGender="",$idMovie)
+    public function __construct($idGender="",$idMovie="")
     {
         $this->idGender=$idGender;
         $this->idMovie=$idMovie; 

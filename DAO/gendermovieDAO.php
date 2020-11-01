@@ -24,6 +24,39 @@ class gendermovieDAO
     }
 
 
+    public function getAll()
+    {
+        $gendermovieList=array();
+
+        try
+        {
+            $sql="SELECT * FROM moviexgender;";
+
+            $this->connection=Connection::GetInstance();
+            $value = $this->connection->Execute($sql);
+
+            
+
+            foreach ($value as $fila)
+            {
+                $gendermovie = new GenderMovie();
+
+                $gendermovie->setIdGender($fila['idGender']);
+                $gendermovie->setIdMovie($fila['idMovie']);
+                
+
+                array_push($gendermovieList,$gendermovie);
+
+            }
+            return $gendermovieList;
+            
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+    }
+
 
     public function downloadData2()
     {
@@ -54,55 +87,6 @@ class gendermovieDAO
 
         }
 
-
-
-    }
-
-    public function downloadData()
-    {
-        $jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/now_playing?api_key=".API_KEY."&language=en-US&page=1",true);
-
-
-        $arrayToDecode=($jsonContent) ? json_decode($jsonContent,true):array();
-        
-        foreach ($arrayToDecode as $key =>$valueArray)
-        {
-            foreach($valueArray as $key =>$value)
-            {
-                $movieTitle= $value['title'];
-                $genderIDSarray= $value['genre_ids'];
-
-                
-
-                $movieDAO=new movieDAO();
-            
-
-                $value=$movieDAO->searchIdMovie($movieTitle);
-              
-           
-
-                        foreach ($value as $key =>$valueArray)
-                        {
-                            $idMovie=$valueArray['id'];
-                        }
-
-                        
-                    
-                        
-                        $parameters['idMovie']=$idMovie;
-
-                        foreach($genderIDSarray as $genderID)
-                        {
-                            $parameters['idGender']= $genderID;
-
-                        
-
-                            $this->Add($idMovie,$genderID);
-                            
-
-                        }
-            }
-        }
     }
 
 
@@ -123,6 +107,27 @@ class gendermovieDAO
                     {
                         require_once(VIEWS_PATH."admin-view.php");   
                     }    
+    }
+
+
+    public function getNameGendersxMovie()
+    {
+        $sql="SELECT mxg.idMovie,g.nameGender FROM `moviexgender` as mxg INNER JOIN `gender` as g ON mxg.idGender=g.id ORDER BY mxg.idMovie ASC;";
+       
+
+        try
+        {
+
+            $this->connection=Connection::GetInstance();
+            return $this->connection->Execute($sql);
+    
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
+
     }
 
 

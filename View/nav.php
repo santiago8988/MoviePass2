@@ -1,5 +1,5 @@
 
-<nav class = "navbar-dark bg-dark nabvar">
+<nav class = "navbar navbar-expand-lg navbar-light bg-light">
 
     <a href = "admin-view.php"><img src = "<?php echo IMG_PATH?>logo_page.png" alt = "logo_moviePass" class = "navbar-main_logo-page"></a>
 
