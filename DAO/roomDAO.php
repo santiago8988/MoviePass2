@@ -47,12 +47,13 @@ class roomDAO
 
     public function getroomXcinema($idCinema)
     {
+        $sql = "SELECT * FROM Room WHERE idCinema=".$idCinema.";";
         
         $parameters['idCinema']=$idCinema;  
+
+        
         try
         {   
-            $sql = "SELECT * FROM Room WHERE idCinema=".$idCinema.";";
-            
 
               $this->connection=Connection::GetInstance();
 

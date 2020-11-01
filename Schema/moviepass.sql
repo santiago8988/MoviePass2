@@ -32,7 +32,7 @@ create table IF NOT EXISTS Room
 create table IF NOT EXISTS Movie
 (
     id int AUTO_INCREMENT NOT NULL,
-    title varchar(50) NOT NULL,
+    title varchar(70) NOT NULL ,
     poster varchar(75),
     overview varchar(300),
     classification boolean,
@@ -42,7 +42,8 @@ create table IF NOT EXISTS Movie
     duration int,
     realeseDate date,
 
-    constraint pkMovie primary key (id)
+    constraint pkMovie primary key (id),
+    constraint unq_title UNIQUE(title)
 
     
 );
@@ -165,9 +166,10 @@ create table IF NOT EXISTS Gender
 
 create table IF NOT EXISTS MovieXGender
 (
+   
     idMovie int NOT NULL,
     idGender int NOT NULL,
-    constraint pkMovieXGender primary key (idMovie,idGender),
+    constraint pkMovieGender primary key (idMovie,idGender),
     constraint fkMovieXGender foreign key (idMovie) REFERENCES Movie (id),
     constraint fkGenderXGender foreign key (idGender) REFERENCES Gender (id)
 

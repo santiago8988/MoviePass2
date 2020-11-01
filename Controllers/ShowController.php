@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use DAO\movieDAO as movieDAO;
 use Models\Show as Show;
 use DAO\showDAO as showDAO;
 
@@ -15,20 +16,35 @@ class ShowController
     }
 
 
-    public function ShowAddView()
+    public function ShowAddView($idCine,$idRo,$capaci,$pric)
     {
+        $idCinema=$idCine;
+        $idRoom=$idRo;
+        $capacity=$capaci;
+        $price=$pric;
+
+      
+
+        $movieDAO= new movieDAO();
+        $movieList= $movieDAO->getAll();
+
         require_once(VIEWS_PATH."add-show.php");
     }
 
     public function ShowListView()
     {
-        $arrayShow= $this->showDAO->getAll();
+
+        $showList= $this->showDAO->getAll();
+
+        require_once(VIEWS_PATH."show-list.php");
+
+
     }
 
-    public function Add($idCinema,$day,$hour,$idMovie,$idRoom,$price,$capacity)
+    public function Add($idCinema,$idRoom,$capacity,$price,$day,$hour,$idMovie)
     {
         $show= new Show();
-
+        
         $show->setIdCinema($idCinema);
         $show->setDay($day);
         $show->setHour($hour);
@@ -36,10 +52,15 @@ class ShowController
         $show->setIdroom($idRoom);
         $show->setPrice($price);
         $show->setCapacity($capacity);
+        $show->setSoldtickets(0);
+
+       
 
         $this->showDAO->Add($show);
 
-        $this->ShowAddView();
+        require_once(VIEWS_PATH."admin-view.php");
+
+
     }
 
 }

@@ -43,9 +43,9 @@ class movieController
 
     public function Add()
     {
-        //$this->movieDAO->downloadData();
-       // $this->genderDAO->downloadData();
-        $this->gendermovieDAO->downloadData();
+        $this->movieDAO->downloadData();
+        $this->genderDAO->downloadData();
+        $this->gendermovieDAO->downloadData2();
 
         echo "se cargo todo bien";
 

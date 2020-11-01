@@ -79,28 +79,7 @@ class cinemaDAO
         
     }
 
-    public function updateCinema($id,$name,$adress,$room,$price)
-    {
-     
 
-    }
-
-    public function delete($id)
-    {
-
-    }
-
-
-
-    public function retrieveData()
-    {
-  
-    }
-
-    public function saveData()
-    {
-          
-    }
 
 }
 

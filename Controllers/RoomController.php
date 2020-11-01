@@ -43,22 +43,24 @@ class RoomController
 
         $value=$roomDAO->getroomXcinema($idCinema);
 
-        
 
         if(!empty($value))
         {
             foreach($value as $fila)
             {
+            
               $room=new Room();
               $room->setId($fila['id']);
               $room->setIdCinema($fila['idCinema']);
               $room->setName($fila['nameRoom']);
               $room->setPrice($fila['price']);
               $room->setCapacity($fila['capacity']);
+              
 
               array_push($roomList,$room);
               
             }
+
 
           }
 
@@ -84,6 +86,8 @@ class RoomController
        
 
     }
+
+
 }
 
 

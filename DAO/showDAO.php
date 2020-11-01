@@ -18,9 +18,10 @@ class showDAO
 
         try
         {
-            $sql= "INSERT INTO Show (show_day,hour,soldTickets,idMovie,idRoom,idCinema,price,capacity) values (:show_day,:hour,:soldTickets,:idMovie,:idRoom,:idCinema,:price,:capacity)";
+            $sql= "INSERT INTO Showw (showday,hour,soldTickets,idMovie,idRoom,idCinema,price,capacity) values (:showday,:hour,:soldTickets,:idMovie,:idRoom,:idCinema,:price,:capacity);";
 
-            $parameters['show_day']=$newShow->getDay();
+            
+            $parameters['showday']=$newShow->getDay();
             $parameters['hour']=$newShow->getHour();
             $parameters['soldTickets']=0;
             $parameters['idMovie']=$newShow->getIdMovie();
@@ -31,7 +32,7 @@ class showDAO
             
             $this->connection= Connection::GetInstance();
 
-            return $this->connection->ExecuteNonQuery($sql,$parameters)
+            return $this->connection->ExecuteNonQuery($sql,$parameters);
 
         }
         catch(PDOException $e)
@@ -49,7 +50,7 @@ class showDAO
 
         try
         {
-            $sql= "SELECT * FROM Show";
+            $sql= "SELECT * FROM Showw;";
 
             $this->connection=Connection::GetInstance();
 
@@ -60,7 +61,7 @@ class showDAO
                 $show= new Show();
 
                 $show->setId($fila['id']);
-                $show->setDay($fila['show_day']);
+                $show->setDay($fila['showday']);
                 $show->setHour($fila['hour']);
                 $show->setSoldtickets($fila['soldTickets']);
                 $show->setIdmovie($fila['idMovie']);

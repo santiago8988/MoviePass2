@@ -20,6 +20,7 @@ class Connection
         {   
             $this->pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME,DB_USER,DB_PASS);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
         }
         catch(Exception $e)
         {
@@ -39,13 +40,15 @@ class Connection
     {
         try
         {
-            $this->pdoStatement = $this->pdo->prepare($query);
-            foreach($parameters as $parameterName =>$value)
-            {
-                $this->pdoStatement->bindParam(":".$parameterName,$value);
-            } 
+            $this->Prepare($query);
 
+            
+            $this->BindParameters($parameters, $queryType);
+
+            
             $this->pdoStatement->execute();
+            
+            
 
             return $this->pdoStatement->fetchAll();
         }
@@ -59,33 +62,28 @@ class Connection
     {        
           
         try
-        {
-            
-            $this->pdoStatement = $this->pdo->prepare($query);
-            
-           
-           foreach($parameters as $parameterName =>$value)
-           {
-               
-               $this->pdoStatement->bindParam(":$parameterName",$parameters[$parameterName]);
-              
-           } 
-           
-            $this->pdoStatement->execute();
+            {
+                $this->Prepare($query);
+                
+                $this->BindParameters($parameters, $queryType);
 
-            return $this->pdoStatement->rowCount();
-        }
-        catch(Exception $e)
-        {
-            throw $e;
-        }        	    	
+                $this->pdoStatement->execute();
+
+                return $this->pdoStatement->rowCount();
+            }
+            catch(Exception $e)
+            {
+                throw $e;
+            }   	    	
     }
     
     private function Prepare($query)
     {
         try
         {
+
             $this->pdoStatement = $this->pdo->prepare($query);
+
         }
         catch(Exception $e)
         {
@@ -106,6 +104,11 @@ class Connection
             else
                 $this->pdoStatement->bindParam($i, $parameters[$parameterName]);
         }
+    }
+
+    public function close()
+    {
+        self::$instance=null;
     }
 
 }

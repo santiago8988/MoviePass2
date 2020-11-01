@@ -20,9 +20,43 @@ class gendermovieDAO
 
     public function __construct()
     {
-        
+        $this->connection=new Connection();
     }
 
+
+
+    public function downloadData2()
+    {
+        $jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/now_playing?api_key=".API_KEY."&language=en-US&page=1",true);
+
+
+        $arrayToDecode=($jsonContent) ? json_decode($jsonContent,true):array();
+
+
+        foreach ($arrayToDecode['results'] as $valueArray)
+        {
+
+            
+            $movieTitle = $valueArray['title'];
+            $genderArray=$valueArray['genre_ids'];
+
+            $movieDAO= new movieDAO();
+
+            $idMovie =$movieDAO->searchIdMovie($movieTitle);
+
+
+            foreach($genderArray as $gender)
+            {
+                $this->Add($idMovie,$gender);
+            }
+
+            
+
+        }
+
+
+
+    }
 
     public function downloadData()
     {
@@ -52,7 +86,7 @@ class gendermovieDAO
                             $idMovie=$valueArray['id'];
                         }
 
-                        echo "idMovie despues del search: ". $idMovie."//////";
+                        
                     
                         
                         $parameters['idMovie']=$idMovie;
@@ -74,7 +108,7 @@ class gendermovieDAO
 
     public function Add($idMovie,$idGender)
     {
-        $sql="INSERT INTO MovieXGender(idMovie,idGender) values (:idMovie ,:idGender)";
+        $sql="INSERT INTO MovieXGender(idMovie,idGender) values (:idMovie ,:idGender);";
                   
             $parameters['idMovie']=$idMovie;
             $parameters['idGender']=$idGender;
@@ -82,12 +116,12 @@ class gendermovieDAO
                     {
                         $this->connection = Connection::GetInstance();
 
-                        return $this->connection->ExecuteNonQuery($sql,$parameters);
+                       $this->connection->ExecuteNonQuery($sql,$parameters);
                         
                     }
                     catch(PDOException $e)
                     {
-                        throw $e;   
+                        require_once(VIEWS_PATH."admin-view.php");   
                     }    
     }
 

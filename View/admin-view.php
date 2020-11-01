@@ -39,6 +39,11 @@
 
             <button type="submit">Cargar Base de Datos</button>
         </form>
+
+        <form action="<?php echo FRONT_ROOT?>Show/ShowListView">
+
+            <button type="submit">Listar Shows</button>
+        </form>
         
 
 </html>

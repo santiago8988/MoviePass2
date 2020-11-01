@@ -27,7 +27,7 @@ class movieDAO
 
         try
         {
-            $sql="SELECT * FROM Movie";
+            $sql="SELECT * FROM Movie;";
 
             $this->connection=Connection::GetInstance();
             $value = $this->connection->Execute($sql);
@@ -93,7 +93,7 @@ class movieDAO
                     }
                     catch(PDOException $e)
                     {
-                        throw $e;   
+                        require_once(VIEWS_PATH."admin-view.php");  
                     }       
                   
         }
@@ -104,22 +104,24 @@ class movieDAO
 
     public function searchIdMovie($title)
     {
-
-        $sql= "SELECT * FROM Movie  WHERE title='$title'";
         
+        $sql= "SELECT id FROM movie  WHERE title=".'"'.$title.'"';
+
         try
         {
            
             $this->connection=Connection::GetInstance(); 
-            return $this->connection->Execute($sql);
-     
             
-           /* foreach ($value as $key =>$valueArray)
+            
+            $value= $this->connection->Execute($sql);
+            
+           
+            foreach ($value as $key =>$valueArray)
             {
                 $id=$valueArray['id'];
             }
-            
-            return $id;*/
+
+            return $id;
 
         }
         catch(PDOException $e)

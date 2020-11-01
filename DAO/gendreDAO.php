@@ -90,7 +90,7 @@ class gendreDAO
                 }
                 catch(PDOException $e)
                 {   
-                    throw $e;
+                    require_once(VIEWS_PATH."admin-view.php");  
                 }
             }
 
