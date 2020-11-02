@@ -84,6 +84,50 @@ class showDAO
 
     }
 
+    public function getShowbyDate($date)
+    {
+        $sql="SELECT * FROM Showw WHERE showday>=".'"'.$date.'";';
+
+
+        $showList=array();
+
+
+        try
+        {
+           
+
+            $this->connection=Connection::GetInstance();
+
+            $value=$this->connection->Execute($sql);
+
+            foreach($value as $fila)
+            {
+                $show= new Show();
+
+                $show->setId($fila['id']);
+                $show->setDay($fila['showday']);
+                $show->setHour($fila['hour']);
+                $show->setSoldtickets($fila['soldTickets']);
+                $show->setIdmovie($fila['idMovie']);
+                $show->setIdroom($fila['idRoom']);
+                $show->setIdCinema($fila['idCinema']);
+                $show->setPrice($fila['price']);
+                $show->setCapacity($fila['capacity']);
+
+                array_push($showList,$show);
+            }
+
+            return $showList;
+
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
+    }
+
 }
 
 

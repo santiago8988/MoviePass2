@@ -105,7 +105,7 @@ class movieDAO
     public function searchIdMovie($title)
     {
         
-        $sql= "SELECT id FROM movie  WHERE title=".'"'.$title.'"';
+        $sql= "SELECT id FROM movie  WHERE title=".'"'.$title.'";';
 
         try
         {
@@ -122,6 +122,48 @@ class movieDAO
             }
 
             return $id;
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+    }
+
+
+    
+    public function searchMovie($idMovie)
+    {
+        
+        $sql= "SELECT * FROM movie  WHERE id=".'"'.$idMovie.'";';
+
+        try
+        {
+           
+            $this->connection=Connection::GetInstance(); 
+            
+            
+            $value= $this->connection->Execute($sql);
+            
+           
+            $movie = new Movie();
+
+            foreach($value as $valueArray)
+            {
+
+                $movie->setIdMovie($valueArray['id']);
+                $movie->setMovieName($valueArray['title']);
+                $movie->setPhoto($valueArray['poster']);
+                $movie->setoverView($valueArray['overview']);
+                $movie->setClassification($valueArray['classification']);
+                $movie->setVoteAverage($valueArray['voteAverage']);
+                $movie->setVoteCount($valueArray['voteCount']);
+                $movie->setOriginalLanguage($valueArray['original_language']);
+                $movie->setReleaseDate($valueArray['realeseDate']);
+            }
+
+            return $movie;
+
 
         }
         catch(PDOException $e)
@@ -156,6 +198,85 @@ class movieDAO
         }
 
         return $movieList;
+    }
+
+
+    public function moviesSlider()
+    {
+        $sql="SELECT * FROM movie ORDER BY voteAverage DESC LIMIT 3;";
+
+        $movieList=array();
+        
+        try
+        {
+                $this->connection=Connection::GetInstance();
+
+                $value=$this->connection->Execute($sql);
+
+                foreach ($value as $fila)
+                {
+                    $movie = new Movie();
+                    $movie->setIdMovie($fila['id']);
+                    $movie->setMovieName($fila['title']);
+                    $movie->setPhoto($fila['poster']);
+                    $movie->setoverView($fila['overview']);
+                    $movie->setClassification($fila['classification']);
+                    $movie->setVoteAverage($fila['voteAverage']);
+                    $movie->setVoteCount($fila['voteCount']);
+                    $movie->setOriginalLanguage($fila['original_language']);
+                    $movie->setReleaseDate($fila['realeseDate']);
+
+                    array_push($movieList,$movie);
+                }
+                
+                return $movieList;
+
+
+        }
+        catch(PDOException $e)
+        {
+                throw $e;
+        }
+    }
+
+    public function searchMoviesbyGender($nameGender)
+    {
+        $sql="SELECT * FROM movie as m INNER JOIN moviexgender as mxg ON m.id=mxg.idMovie INNER JOIN gender as g ON g.id=mxg.idGender WHERE (g.nameGender=".'"'.$nameGender.'"'.") GROUP BY mxg.idMovie;";
+        
+        $movieList=array();
+        
+        try
+        {
+                $this->connection=Connection::GetInstance();
+
+                $value=$this->connection->Execute($sql);
+
+                foreach ($value as $fila)
+                {
+                    $movie = new Movie();
+                    $movie->setIdMovie($fila['id']);
+                    $movie->setMovieName($fila['title']);
+                    $movie->setPhoto($fila['poster']);
+                    $movie->setoverView($fila['overview']);
+                    $movie->setClassification($fila['classification']);
+                    $movie->setVoteAverage($fila['voteAverage']);
+                    $movie->setVoteCount($fila['voteCount']);
+                    $movie->setOriginalLanguage($fila['original_language']);
+                    $movie->setReleaseDate($fila['realeseDate']);
+
+                    array_push($movieList,$movie);
+                }
+                
+                
+                return $movieList;
+
+
+        }
+        catch(PDOException $e)
+        {
+                throw $e;
+        }
+
     }
 
 

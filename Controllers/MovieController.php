@@ -53,6 +53,8 @@ class movieController
 
         require_once(VIEWS_PATH."admin-view.php");
     }
+
+ 
 }
 
 ?>

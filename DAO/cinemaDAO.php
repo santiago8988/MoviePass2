@@ -75,8 +75,36 @@ class cinemaDAO
 
     public function searchCinema($idCinema)
     {
-    
-        
+        $sql= "SELECT * FROM cinema  WHERE id=".'"'.$idCinema.'";';
+
+        try
+        {
+           
+            $this->connection=Connection::GetInstance(); 
+            
+            
+            $value= $this->connection->Execute($sql);
+            
+           
+            $cinema = new Cinema();
+
+            foreach($value as $valueArray)
+            {
+                $cinema->setIdCinema($valueArray['id']);
+                $cinema->setName($valueArray['nameCinema']);
+                $cinema->setAdress($valueArray['adress']);
+
+            }
+
+            return $cinema;
+
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
     }
 
 

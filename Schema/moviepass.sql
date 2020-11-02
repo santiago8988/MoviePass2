@@ -88,40 +88,27 @@ create table IF NOT EXISTS Payment
 
 
 
-create table IF NOT EXISTS Roles
-(
-    id int AUTO_INCREMENT,
-    name varchar(50),
 
-    constraint pkRole primary key (id)
-);
 
 create table IF NOT EXISTS User
 (
     id int AUTO_INCREMENT,
     email varchar(50) not null,
     pass varchar(50) not null,
-    idProfile int,
-    idRole int,
+    userName varchar(50) NOT NULL,
+    gender varchar(10) NOT NULL,
+    birthday date,
+    photo varchar(300),
+    isAdmin boolean,
 
-    constraint pkUser primary key (id),
-    constraint fkUserRole foreign key (idRole) REFERENCES Roles(id)
+
+  constraint pkUser primary key (id),
+  constraint unq_email UNIQUE(email)
+
    
 );
 
-create table IF NOT EXISTS Profiles
-(
-    id int AUTO_INCREMENT NOT NULL,
-    idUser int,
-    userName varchar(50) not null,
-    gender varchar(50),
-    isAdmin boolean,
-    birthday date,
-    photo varchar(50),
 
-    constraint pkProfile primary key (id),
-    constraint fkProfileUser foreign key (idUser) REFERENCES User (id)
-);
 
 
 
@@ -175,9 +162,6 @@ create table IF NOT EXISTS MovieXGender
 
 );
 
-
-
-ALTER TABLE User ADD constraint  fkUserProfile foreign key (idProfile) REFERENCES Profiles(id);
 
 
 

@@ -1,6 +1,9 @@
 <?php
 
 namespace Controllers;
+use DAO\movieDAO as movieDAO;
+use DAO\gendermovieDAO as gendermovieDAO;
+use DAO\gendreDAO as genderDAO;
 
 class HomeController
 {
@@ -11,7 +14,19 @@ class HomeController
 
     public static function Index ()
     {
-        require_once(VIEWS_PATH."admin-view.php");
+        $movieDAO= new movieDAO();
+
+        $movieList= $movieDAO->moviesSlider();
+         require_once(VIEWS_PATH."index.php");
+
+        /*$movieDAO=new movieDAO();
+        $genderDAO=new genderDAO();
+        $gendermovieDAO=new gendermovieDAO();
+        $movieDAO->downloadData();
+        $genderDAO->downloadData();
+        $gendermovieDAO->downloadData();*/
+
+       //require_once(VIEWS_PATH."admin-view.php");
     }
 
 }

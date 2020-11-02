@@ -99,7 +99,7 @@
          */
         public function setPhoto($photo)
         {
-            $this->photo=$photo;
+            $this->photo="http://image.tmdb.org/t/p/w500".$photo;
         }
 
         /**
@@ -119,7 +119,7 @@
         /**
          */
         public function getClassification()
-        {   if ($this->classification == false)
+        {   if ($this->classification == true)
             return "Mayores";
             else { return "ATP";}
         }

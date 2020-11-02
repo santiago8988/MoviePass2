@@ -63,6 +63,11 @@ class ShowController
 
     }
 
+    public function Buy()
+    {
+        require_once(VIEWS_PATH."showBuy.php");
+    }
+
 }
 
 

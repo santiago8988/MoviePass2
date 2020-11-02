@@ -89,6 +89,43 @@ class roomDAO
             throw $e;
         }
     }
+
+
+    public function searchRoom($idRoom)
+    {
+        $sql= "SELECT * FROM room  WHERE id=".'"'.$idRoom.'";';
+
+        try
+        {
+           
+            $this->connection=Connection::GetInstance(); 
+            
+            
+            $value= $this->connection->Execute($sql);
+            
+           
+            $room = new Room();
+
+            foreach($value as $valueArray)
+            {
+
+                $room->setCapacity($valueArray['capacity']);
+                $room->setPrice($valueArray['price']);
+                $room->setIdCinema($valueArray['idCinema']);
+                $room->setId($valueArray['id']);
+                $room->setName($valueArray['nameRoom']);
+            }
+
+            return $room;
+
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
+    }
 }
 
 ?>

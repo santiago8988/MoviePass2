@@ -7,7 +7,7 @@ class Gendre{
     private $idGender;
     private $nameGender;
 
-    public function __construct($idGender,$nameGender)
+    public function __construct($idGender="",$nameGender="")
     {
         $this->idGender=$idGender;
         $this->nameGender=$nameGender;

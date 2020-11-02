@@ -7,6 +7,8 @@ use PDOException;
 use DAO\Connection as Connection;
 use DAO\QueryType as QueryType;
 use \PDO as PDO;
+
+
 class gendreDAO
 {
 
@@ -20,48 +22,37 @@ class gendreDAO
 
     public function getAll ()
     {
-        $this->retrieveData();
+      $sql="SELECT * FROM gender;";
 
-        return $this->gendreList;
-    }
+        $genderList=array();
 
-    public function retrieveData()
-    {
-        $this->gendreList=array();
-
-        if(file_exists(ROOT.'/Data/gendre.json'))
+        try
         {
-            $jsonContent= file_get_contents(dirname(__DIR__).'/Data/gendre.json');
 
-            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+            $this->connection=Connection::GetInstance();
+            $value=$this->connection->Execute($sql);
 
-            foreach ($arrayToDecode as $valueArray)
+            foreach ($value as $valueArray)
             {
-                $gendre= new Gendre($valueArray['id'],$valueArray['name']);
+                $gender=new Gendre();
 
-                array_push($this->gendreList,$gendre);
+                $gender->setIdGender($valueArray['id']);
+                $gender->setGenderName($valueArray['nameGender']);
+
+                array_push($genderList,$gender);
             }
+            return $genderList;
         }
-    }
-
-    public function saveData()
-    {
-        $arrayToEncode = array();
-
-        foreach($this->gendreList as $gender)
+        catch(PDOException $e)
         {
-            $valueArray['id']=$gender->getIdGender();
-            $valueArray['name']=$gender->getGenderName();
-      
-
-            array_push($arrayToEncode,$valueArray);
-
+            throw $e;
         }
 
-        $jsonContent= json_encode($arrayToEncode,JSON_PRETTY_PRINT);
-
-        file_put_contents(ROOT.'/Data/gendre.json',$jsonContent);
     }
+
+ 
+
+ 
 
     public function downloadData()
     {
@@ -98,6 +89,8 @@ class gendreDAO
 
         
     }
+
+    
 
 }
 

@@ -13,11 +13,12 @@ class User {
     private $birthday;
     private $photo;
 
-        public function __construct ($email=" ",$userName=" ",$password=" ",$gender=" ",$birthday=" ",$photo=" ")
+        public function __construct ($idUser="",$email=" ",$userName=" ",$password=" ",$gender=" ",$birthday=" ",$photo=" ")
         {
+            $this->idUser=$idUser;
             $this->email=$email;
-            $this->userName=$userName;
             $this->password=$password;
+            $this->userName=$userName;
             $this->gender=$gender;
             $this->birthday=$birthday;
             $this->photo=$photo;
