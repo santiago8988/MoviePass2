@@ -83,6 +83,16 @@ class UserController
 
         require_once(VIEWS_PATH."movie-list.php");
     }
+
+
+    public function showViewAverage()
+    {
+        $movieDAO = new movieDAO();
+
+        $movieList=$movieDAO->getMoviesOrderByvoteCount();
+
+        require_once(VIEWS_PATH."movie-list.php");
+    }
 }
 
 

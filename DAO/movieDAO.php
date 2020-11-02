@@ -201,9 +201,9 @@ class movieDAO
     }
 
 
-    public function moviesSlider()
+    public function getMoviesVoteAverage()
     {
-        $sql="SELECT * FROM movie ORDER BY voteAverage DESC LIMIT 3;";
+        $sql="SELECT * FROM movie ORDER BY voteAverage DESC;";
 
         $movieList=array();
         
@@ -263,6 +263,7 @@ class movieDAO
                     $movie->setVoteCount($fila['voteCount']);
                     $movie->setOriginalLanguage($fila['original_language']);
                     $movie->setReleaseDate($fila['realeseDate']);
+                    $movie->setGender($nameGender);
 
                     array_push($movieList,$movie);
                 }
@@ -276,6 +277,133 @@ class movieDAO
         {
                 throw $e;
         }
+
+    }
+
+    public function getMoviesOrderByvoteCount()
+    {
+        $sql="SELECT * FROM movie ORDER BY voteCount DESC;";
+
+        $movieList=array();
+
+        
+        try
+        {
+            $this->connection=Connection::GetInstance();
+            
+            $value=$this->connection->Execute($sql);
+            
+            foreach ($value as $fila)
+            {
+                $movie = new Movie();
+                $movie->setIdMovie($fila['id']);
+                $movie->setMovieName($fila['title']);
+                $movie->setPhoto($fila['poster']);
+                $movie->setoverView($fila['overview']);
+                $movie->setClassification($fila['classification']);
+                $movie->setVoteAverage($fila['voteAverage']);
+                $movie->setVoteCount($fila['voteCount']);
+                $movie->setOriginalLanguage($fila['original_language']);
+                $movie->setReleaseDate($fila['realeseDate']);
+                
+                array_push($movieList,$movie);
+            }
+
+
+
+                $moviegenderDAO= new gendermovieDAO();
+        
+                $value=$moviegenderDAO->getNameGendersxMovie();
+            
+                foreach($value as $gender)
+                {
+                    $idMovie=$gender['idMovie'];
+                    $nameGender=$gender['nameGender'];
+        
+                    foreach($movieList as $movie)
+                    {
+                        if($movie->getIdMovie() ==$idMovie)
+                        {
+                            
+                            $movie->setGender($nameGender);
+                        }
+                    }
+        
+                }
+                
+                
+                return $movieList;
+
+
+        }
+        catch(PDOException $e)
+        {
+                throw $e;
+        }
+
+    }
+
+    public function searchBar($nameMovie)
+    {
+        $sql="SELECT * FROM movie as m WHERE m.title LIKE '%$nameMovie%';";
+
+        
+        $movieList = array();
+
+        try
+        {
+            $this->connection=Connection::GetInstance();
+            
+            $value=$this->connection->Execute($sql);
+            
+            foreach ($value as $fila)
+            {
+                $movie = new Movie();
+                $movie->setIdMovie($fila['id']);
+                $movie->setMovieName($fila['title']);
+                $movie->setPhoto($fila['poster']);
+                $movie->setoverView($fila['overview']);
+                $movie->setClassification($fila['classification']);
+                $movie->setVoteAverage($fila['voteAverage']);
+                $movie->setVoteCount($fila['voteCount']);
+                $movie->setOriginalLanguage($fila['original_language']);
+                $movie->setReleaseDate($fila['realeseDate']);
+                
+                array_push($movieList,$movie);
+            }
+
+
+
+                $moviegenderDAO= new gendermovieDAO();
+        
+                $value=$moviegenderDAO->getNameGendersxMovie();
+            
+                foreach($value as $gender)
+                {
+                    $idMovie=$gender['idMovie'];
+                    $nameGender=$gender['nameGender'];
+        
+                    foreach($movieList as $movie)
+                    {
+                        if($movie->getIdMovie() ==$idMovie)
+                        {
+                            
+                            $movie->setGender($nameGender);
+                        }
+                    }
+        
+                }
+                
+                
+                return $movieList;
+
+
+
+    }catch(PDOException $e)
+    {
+        throw $e;
+    }
+   
 
     }
 

@@ -8,7 +8,7 @@
                 {
  
             ?>
-                    <form action="<?php echo FRONT_ROOT?>User/showMovieGender" method="POST" >><button type="submit" name="gender" id="gender" value="<?php echo $gender->getGenderName();?>"><?php echo $gender->getGenderName();?></button></form>
+                    <form action="<?php echo FRONT_ROOT?>User/showMovieGender" method="POST" ><button class="btn btn-sm btn-secondary active type="submit" name="gender" id="gender" value="<?php echo $gender->getGenderName();?>"><?php echo $gender->getGenderName();?></button></form>
 
                 <?php
                 

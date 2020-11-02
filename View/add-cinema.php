@@ -9,8 +9,8 @@
         <input type = "text" name = "adress" id = "adress" required>
 
       
-        <button type = "submit">Agregar</button>
-        <button type = "reset">Reset</button>
+        <button class="btn btn-sm btn-secondary active" type = "submit">Agregar</button>
+        <button class="btn btn-sm btn-secondary active" type = "reset">Reset</button>
         
     </form>
 </html>

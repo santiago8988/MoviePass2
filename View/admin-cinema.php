@@ -9,11 +9,11 @@ require_once("header.php");
 
     
         <form action="<?php echo FRONT_ROOT?>Admin/Add">
-            <button type="submit">Agregar Cine</button>
+            <button  class="btn btn-sm btn-secondary active" type="submit">Agregar Cine</button>
         </form>
 
         <form action="<?php echo FRONT_ROOT?>Admin/cinemaList">
-            <button type="submit">Listar Cines</button>
+            <button class="btn btn-sm btn-secondary active" type="submit">Listar Cines</button>
         </form>
 
 

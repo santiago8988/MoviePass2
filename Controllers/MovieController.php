@@ -47,11 +47,22 @@ class movieController
     {
         $this->movieDAO->downloadData();
         $this->genderDAO->downloadData();
-        $this->gendermovieDAO->downloadData2();
+        $this->gendermovieDAO->downloadData();
 
-        echo "se cargo todo bien";
+      
 
         require_once(VIEWS_PATH."admin-view.php");
+    }
+
+    public function Search($nameMovie)
+    {
+        $movieDAO= new movieDAO();
+
+        $movieList= $movieDAO->searchBar($nameMovie);
+
+        require_once(VIEWS_PATH."movie-list.php");
+
+
     }
 
  
