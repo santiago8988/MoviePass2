@@ -14,9 +14,9 @@ class HomeController
 
     public static function Index ()
     {
-        /*$movieDAO= new movieDAO();
+       $movieDAO= new movieDAO();
         $movieList= $movieDAO->getMoviesVoteAverage();
-         require_once(VIEWS_PATH."index.php");*/
+         require_once(VIEWS_PATH."index.php");
 
         /*$movieDAO=new movieDAO();
         $genderDAO=new genderDAO();
@@ -25,7 +25,7 @@ class HomeController
         $genderDAO->downloadData();
         $gendermovieDAO->downloadData();*/
 
-       require_once(VIEWS_PATH."admin-view.php");
+       //require_once(VIEWS_PATH."admin-view.php");
     }
 
 }

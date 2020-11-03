@@ -6,6 +6,8 @@
         
             
      </div>
+
+     <div><?php include_once(VIEWS_PATH."search-bar.php");?></div>
         
         <ol class = "navbar-main_ol">
             <li>

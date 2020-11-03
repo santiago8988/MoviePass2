@@ -1,7 +1,7 @@
 <html>
     <div>
     <div class="container">
-        <h2>Listado de Peliculas</h2>
+        <h2 style="color:black">Listado de Peliculas</h2>
 
         <table class="table table-dark">
             <thead>

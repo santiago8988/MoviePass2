@@ -15,7 +15,10 @@ class ShowController
         $this->showDAO=new showDAO();
     }
 
-
+    public function AdminView()
+    {
+        require_once(VIEWS_PATH."admin-view.php");
+    }
     public function ShowAddView($idCine,$idRo,$capaci,$pric)
     {
         $idCinema=$idCine;
@@ -61,17 +64,17 @@ class ShowController
 
             $this->showDAO->Add($show); 
     
-            require_once(VIEWS_PATH."admin-view.php");
+            echo "<script> alert('Show creado =)');";  
+	        echo "window.location = 'AdminView/admin-view.php'; </script>";
         }
         else
         {
-            echo "El show ya existe, no se puede crear";
-            require_once(VIEWS_PATH."admin-view.php");
+            echo "<script> alert('El show no se puede crear porque ya EXISTE');";  
+	        echo "window.location = 'AdminView/admin-view.php'; </script>";
+            //require_once(VIEWS_PATH."admin-view.php");
+
+            $this->AdminView();
         }
-
-
-       
-
 
 
     }
