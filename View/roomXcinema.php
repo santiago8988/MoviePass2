@@ -2,13 +2,13 @@
 
 
     <div class="container">
-        <h1 class="text-info"><?php echo $cinemaName ?></h1>
+        <h1 class="text-info">Cine: <?php echo $cinemaName ?></h1>
         
 
         <form class="form-inline" action="<?php echo FRONT_ROOT?>Room/ShowAddView" method = "POST">
-                    <label><h2>LISTADO DE SALAS:</h2></label>
+                    <label><h2 style="color:black">LISTADO DE SALAS</h2></label>
                     <input type = "hidden" name = "id" id = "idCinema" required value="<?php echo $idCinema;?>">
-                    <input type="submit" value="Crear Sala">
+                    <input type="submit" value="Crear Sala" style="color:black">
         </form>
         
 
@@ -32,10 +32,10 @@
                                 ?>
                                 
                                     <tr>
-                                        <td><?php echo $room->getIdCinema(); ?></td>
+                                        <td><?php echo $room->getId(); ?></td>
                                         <td><?php echo $room->getName(); ?></td>
-                                        <td><?php echo $room->getCapacity(); ?></td>
-                                        <td><?php echo $room->getPrice(); ?></td>
+                                        <td><?php echo $room->getCapacity();?> personas</td>
+                                        <td>$<?php echo $room->getPrice(); ?></td>
                                         <td><form action = "<?php echo FRONT_ROOT?>Room/Remove" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $room->getIdCinema(); ?>">Eliminar</button></form>
                                             <form action = "<?php echo FRONT_ROOT?>Room/Edit" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $room->getIdCinema(); ?>">Editar</button></form> 
                                             <form action = "<?php echo FRONT_ROOT?>Show/ShowAddView" method = "POST">

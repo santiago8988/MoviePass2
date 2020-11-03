@@ -5,6 +5,8 @@
         <label for = "cinema_name">Nombre</label>
         <input type = "text" name = "name" id = "name" required>
 
+        <br>
+
         <label for = "cinema_adress">Dirección</label>
         <input type = "text" name = "adress" id = "adress" required>
 

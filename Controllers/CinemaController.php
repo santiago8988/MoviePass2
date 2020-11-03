@@ -64,9 +64,9 @@ class CinemaController
         require_once(VIEWS_PATH."editCinema.php");
     }
 
-    public function update($id,$name,$adress,$room,$price)
+    public function update($id,$name,$adress)
     {
-        $this->cinemaDAO->updateCinema($id,$name,$adress,$room,$price);
+        $this->cinemaDAO->updateCinema($id,$name,$adress);
 
         $this->ShowListView();
     }

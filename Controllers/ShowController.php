@@ -43,22 +43,35 @@ class ShowController
 
     public function Add($idCinema,$idRoom,$capacity,$price,$day,$hour,$idMovie)
     {
-        $show= new Show();
         
-        $show->setIdCinema($idCinema);
-        $show->setDay($day);
-        $show->setHour($hour);
-        $show->setIdmovie($idMovie);
-        $show->setIdroom($idRoom);
-        $show->setPrice($price);
-        $show->setCapacity($capacity);
-        $show->setSoldtickets(0);
+        $showDAO= new showDAO();
+
+        if(!($showDAO->showExistence($idCinema,$day)))
+        {
+            $show= new Show();
+            
+            $show->setIdCinema($idCinema);
+            $show->setDay($day);
+            $show->setHour($hour);
+            $show->setIdmovie($idMovie);
+            $show->setIdroom($idRoom);
+            $show->setPrice($price);
+            $show->setCapacity($capacity);
+            $show->setSoldtickets(0);
+
+            $this->showDAO->Add($show); 
+    
+            require_once(VIEWS_PATH."admin-view.php");
+        }
+        else
+        {
+            echo "El show ya existe, no se puede crear";
+            require_once(VIEWS_PATH."admin-view.php");
+        }
+
 
        
 
-        $this->showDAO->Add($show);
-
-        require_once(VIEWS_PATH."admin-view.php");
 
 
     }

@@ -7,13 +7,16 @@
         <input type = "hidden" name = "capacity" id = "capacity" required value="<?php echo $capacity;?>">
         <input type = "hidden" name = "price" id = "price" required value="<?php echo $price;?>">
 
-        <label for = "cinema_name">Dia</label>
+        <label for = "cinema_name">Dia:</label>
         <input type = "date" name = "day" id = "day" required>
+        <br>
 
-        <label for = "cinema_adress">Hora</label>
+        <label for = "cinema_adress">Hora:</label>
         <input type = "time" name = "hour" id = "hour" required>
+        <br>
 
-        <select name="movie" id="idMovie" required>
+        <label for="movie_name">Pelicula:</label>
+        <select name="movie" id="idMovie" style="color:black"  required>
             
             <option selected disabled value="Seleccione una pelicula"></option>
             <?php

@@ -107,6 +107,34 @@ class cinemaDAO
 
     }
 
+    public function delete($idCinema)
+    {
+        $sql=";"; //agregar un campo a Model\Cinema----->isActive, ya que no lo quiero borrar de la base de datos, solo no lo voy a querer mostrar.
+    }
+
+    public function updateCinema($idCinema,$name,$adress)
+    {
+        $sql="UPDATE cinema SET nameCinema=".'"'."$name".'"'.",adress=".'"'."$adress".'"'." WHERE id="."$idCinema".";";
+
+        $parameters["nameCinema"]=$idCinema;
+        $parameters["adress"]=$adress;
+
+
+        try
+        {
+            $this->connection= Connection::GetInstance();
+           
+           return $this->connection->ExecuteNonQuery($sql,$parameters);
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
+
+    }
+
 
 
 }

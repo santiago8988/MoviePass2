@@ -128,6 +128,42 @@ class showDAO
 
     }
 
+    public function showExistence($idMovie,$day)
+    {
+        $sql="SELECT COUNT(idMovie) as MovieScreen FROM showw WHERE showday=".'"'.$day.'"'. "and idMovie=".$idMovie.  ";";
+
+        
+        try
+        {
+
+            $this->connection=Connection::GetInstance();
+            $value=$this->connection->Execute($sql);
+
+
+            foreach($value as $valueArray)
+            {
+            
+                if($valueArray['MovieScreen']>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+        }
+        catch(PDOException $e)
+        {
+            throw $e;
+        }
+
+
+        
+    }  
+
 }
 
 

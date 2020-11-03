@@ -2,7 +2,7 @@
 
 
     <div class="container">
-        <h2 class="text-info">Listado de Cines</h2>
+        <h2 class="text" style="color:black">Listado de Cines</h2>
         
 
         <table class="table table-dark">
@@ -32,7 +32,7 @@
                                                <input type="hidden" name="id" id="id" required value="<?php echo $cinema->getName() ?>">
                                             <button class="btn btn-xs btn-secondary active" type = "submit">Ver Salas</button>
                                        </form>
-                                       <form action = "<?php echo FRONT_ROOT?>Cinema/Remove" method = "POST"><button class="btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $cinema->getIdCinema(); ?>">Eliminar</button></form>
+                                       <form action = "<?php echo FRONT_ROOT?>Cinema/Remove" method = "POST"><button class="btn btn-xs btn btn-danger" type = "submit" name = "remove" value = "<?php echo $cinema->getIdCinema(); ?>">Eliminar</button></form>
                                          </td>
                                     </tr>
                                 
