@@ -14,18 +14,21 @@ class HomeController
 
     public static function Index ()
     {
-       $movieDAO= new movieDAO();
-        $movieList= $movieDAO->getMoviesVoteAverage();
-         require_once(VIEWS_PATH."index.php");
+        ///////////////USER VIEW///////////////
+                /*$movieDAO= new movieDAO();
+                $movieList= $movieDAO->getMoviesVoteAverage();
+                require_once(VIEWS_PATH."index.php");*/
 
-        /*$movieDAO=new movieDAO();
-        $genderDAO=new genderDAO();
-        $gendermovieDAO=new gendermovieDAO();
-        $movieDAO->downloadData();
-        $genderDAO->downloadData();
-        $gendermovieDAO->downloadData();*/
+        /////////CARGAR BASE DE DATOS///////////////
+                /*$movieDAO=new movieDAO();
+                $genderDAO=new genderDAO();
+                $gendermovieDAO=new gendermovieDAO();
+                $movieDAO->downloadData();
+                $genderDAO->downloadData();
+                $gendermovieDAO->downloadData();*/
 
-       //require_once(VIEWS_PATH."admin-view.php");
+        ///////////////ADMIN VIEW//////////////////
+                require_once(VIEWS_PATH."admin-view.php");
     }
 
 }
